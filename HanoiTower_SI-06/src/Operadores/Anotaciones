@@ -1,0 +1,2 @@
+A la hora de implementar las clases de los operadores nos hemos dado cuenta que no hay difernecia real entre un tipo de movimiento y otro
+en cuanto a codificacion, por lo que hemos pensado que quizas no hiciese falta disponer de dos clases y que se pudiese avanzar con una solamente.
