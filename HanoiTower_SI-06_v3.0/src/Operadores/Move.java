@@ -22,15 +22,26 @@ public class Move extends Operator {
 		// discos, que se lleve
 		// a una torre vacia o con discos de mayor tamaño que el disco que se va
 		// a mover.
-		if (!((Environment) state).getArrayTorres()[this.posOrigen].getDiscosEnTorre().isEmpty()) {
-			if (((Environment) state).getArrayTorres()[this.posDestino].getDiscosEnTorre().isEmpty()
-					|| ((Environment) state).getArrayTorres()[this.posOrigen].getDiscosEnTorre().get(0)
-							.getId() < ((Environment) state).getArrayTorres()[this.posDestino].getDiscosEnTorre().get(0)
-									.getId()) {
+		Environment env = (Environment) state;
+		if (!(env.getArrayTorres()[this.posOrigen].getDiscosEnTorre().isEmpty())) {
+			if (!env.getArrayTorres()[this.posDestino].getDiscosEnTorre().isEmpty()) {
+				if (((Environment) state).getArrayTorres()[this.posOrigen].getDiscosEnTorre().get(0)
+						.getId() < ((Environment) state).getArrayTorres()[this.posDestino].getDiscosEnTorre().get(0)
+								.getId()) {
+//					System.out.println("Intentando realizar movimiento " + this.posOrigen + " " + this.posDestino);
+//					System.out.println(env.toString());
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+//				System.out.println("Intentando realizar movimiento " + this.posOrigen + " " + this.posDestino);
+//				System.out.println(env.toString());
 				return true;
 			}
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -40,6 +51,8 @@ public class Move extends Operator {
 		Disc disc = newEnvironment.getArrayTorres()[this.posOrigen].getDiscosEnTorre().get(0);
 		newEnvironment.getArrayTorres()[this.posOrigen].getDiscosEnTorre().remove(0);
 		newEnvironment.getArrayTorres()[this.posDestino].getDiscosEnTorre().add(0, disc);
+//		System.out.println("Realizando movimiento " + this.posOrigen + this.posDestino);
+
 		return newEnvironment;
 	}
 }

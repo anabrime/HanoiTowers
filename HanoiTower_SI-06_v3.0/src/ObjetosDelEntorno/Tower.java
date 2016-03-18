@@ -5,7 +5,6 @@ import java.util.ArrayList;
 //En la clase torre equals de arrays de discos y en environmment equals de torre con torre
 public class Tower implements Cloneable {
 
-	// ¿Más optimo usar id o diferenciar torres en la clase entorno?
 	// private int id;
 
 	private ArrayList<Disc> discosEnTorre;
@@ -29,7 +28,7 @@ public class Tower implements Cloneable {
 	// Coloca discos en la primera torre donde
 	// el numero de discos a colocar es "id"
 	public void estadoInicial_(int id) {
-		for (int i = 0; i <= id; i++) {
+		for (int i = 1; i <= id; i++) {
 			Disc disc = new Disc(i);
 			this.discosEnTorre.add(disc);
 		}
@@ -45,38 +44,38 @@ public class Tower implements Cloneable {
 		return str;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object clone() {
-		Tower clon = null;
+		Tower clon = new Tower();
 
 		try {
 			clon = (Tower) super.clone();
-			clon.discosEnTorre = this.discosEnTorre;
-			for (int i = 0; i < this.discosEnTorre.size(); i++) {
-				clon.discosEnTorre.add(this.getDiscosEnTorreConIndice(i));
-			}
+			clon.discosEnTorre = (ArrayList<Disc>) this.discosEnTorre.clone();
 		} catch (CloneNotSupportedException e) {
-			System.err.println("% [ERROR] clone(): " + e.getMessage());
+			System.err.println("% [ERROR] Tower.clone(): " + e.getMessage());
 		}
+		// for (int i = 0; i < this.discosEnTorre.size(); i++) {
+		// clon.discosEnTorre.add((Disc)
+		// this.getDiscosEnTorreConIndice(i).clone());
+		// }
 
 		return clon;
 	}
 
 	public boolean equals(Tower t) {
-		boolean equal = false;
 
 		if (this.getDiscosEnTorre().size() == t.getDiscosEnTorre().size()) {
 
 			for (int i = 0; i < this.getDiscosEnTorre().size(); i++) {
 
-				if (this.getDiscosEnTorreConIndice(i).equals(t.getDiscosEnTorreConIndice(i)))
-					equal = true;
-
-				else
-					equal = false;
+				if (!(this.getDiscosEnTorreConIndice(i).equals(t.getDiscosEnTorreConIndice(i)))) {
+					return false;
+				}
 			}
+			return true;
 		}
-		return equal;
+		return false;
 	}
 	// if(d.equals(t.getDiscosEnTorre()))
 	// if (this.getDiscosEnTorre().equals(t.getDiscosEnTorre())) {

@@ -19,7 +19,7 @@ public class Disc implements Cloneable {
 
 	@Override
 	public String toString() {
-		String str = "Disc:" + this.id +" ";
+		String str = this.id + " ";
 		return str;
 	}
 
@@ -32,14 +32,7 @@ public class Disc implements Cloneable {
 
 	@Override
 	public Object clone() {
-		Object clon = null;
-
-		try {
-			clon = super.clone();
-		} catch (CloneNotSupportedException e) {
-			System.err.println("% [ERROR] Disc.clone(): " + e.getMessage());
-		}
-
+		Disc clon = new Disc(this.id);
 		return clon;
 	}
 }

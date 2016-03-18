@@ -49,7 +49,10 @@ public class Environment extends State implements Cloneable {
 			clon.discos = this.discos;
 			clon.torreInicial = this.torreInicial;
 			clon.torreFinal = this.torreFinal;
-			clon.arrayTorres = this.arrayTorres.clone();
+			clon.arrayTorres = new Tower[this.torres];
+			for (int i = 0; i < this.torres; i++) {
+				clon.arrayTorres[i] = (Tower) this.arrayTorres[i].clone();
+			}
 		} catch (CloneNotSupportedException e) {
 			System.err.println("% [ERROR] Environment.clone(): " + e.getMessage());
 		}
@@ -90,42 +93,56 @@ public class Environment extends State implements Cloneable {
 		if (obj != null && obj instanceof Environment && ((Environment) obj).torres == (this.torres)
 				&& ((Environment) obj).discos == (this.discos)) {
 			for (int i = 0; i < this.torres; i++) {
-				if (arrayTorres[i].equals(((Environment) obj).getArrayTorresConIndice(i))) {
-					return true;
-				}
+				if (!arrayTorres[i].equals(((Environment) obj).getArrayTorresConIndice(i)))
+					return false;
 			}
 		} else {
 			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		String str = "Environment: ";
+		String str = "";
 		for (int i = 0; i < torres; i++) {
-			str += "Torre[" + i + "]";
+			str += "T[" + i + "]";
 			str += arrayTorres[i].toString();
 		}
 		return str;
 	}
 
 	public static void main(String[] args) {
-		Environment entorno = new Environment(3, 4, 1, 4);
-		Environment clon;
-
-		clon = (Environment) entorno.clone();
-		if (entorno.equals(clon)) {
-			System.out.println("El clon del entorno son iguales");
-		} else {
-			System.out.println("El clon del entorno no son iguales");
-		}
+		Environment entorno = new Environment(3, 4, 0, 2);
+		Environment entorno1 = new Environment(3, 4, 0, 2);
+		System.out.println(entorno.equals(entorno1));
+		 Environment clon;
+		 clon = (Environment) entorno.clone();
+		 System.out.println(clon.discos); System.out.println("Discos iguales");
+		 System.out.println(clon.torres); System.out.println("Torres iguales");
+		 System.out.println(clon.torreInicial); System.out.println("TorreInicial igual");
+		 System.out.println(clon.torreFinal); System.out.println("Torre Final igual");
+		 System.out.println(clon.equals(entorno));
+		 for(int i=0;i<entorno.torres;i++){
+		 if(clon.arrayTorres[i].equals(entorno.arrayTorres[i])){
+		 System.out.println("Torre detectada");
+		 System.out.println("Torre " +i +" clonada corectamente");
+		 }
+		 else{
+		 System.out.println("No hay torres detectadas");
+		 }
+		 }
+		 if (entorno.equals(clon)) {
+		 System.out.println("El clon del entorno son iguales");
+		 } else {
+		 System.out.println("El clon del entorno no son iguales");
+		 }
 		
-		clon.setDiscos(1);
-		if (entorno.equals(clon)) {
-			System.out.println("El clon del entorno son iguales");
-		} else {
-			System.out.println("El clon del entorno no son iguales");
-		}
+		 clon.setDiscos(1);
+		 if (entorno.equals(clon)) {
+		 System.out.println("El clon del entorno son iguales");
+		 } else {
+		 System.out.println("El clon del entorno no son iguales");
+		 }
 	}
 }

@@ -16,9 +16,12 @@ import es.deusto.ingenieria.is.search.formulation.State;
 public class HanoiTowers extends Problem {
 
 	private Environment env1 = new Environment(3, 4, 0, 2);
+	// private Environment env1 = new Environment(3, 4, 0, 0);
 
 	public HanoiTowers() {
 		super();
+		this.createOperators();
+
 	}
 
 	@Override
@@ -41,7 +44,10 @@ public class HanoiTowers extends Problem {
 
 		for (int i = 0; i < env1.getTorres(); i++) {
 			for (int j = 0; j < env1.getTorres(); j++) {
-				this.addOperator(new Move(i, j));
+				if (i != j) {
+					this.addOperator(new Move(i, j));
+					System.out.println(this.getOperators().size());
+				}
 			}
 		}
 	}
