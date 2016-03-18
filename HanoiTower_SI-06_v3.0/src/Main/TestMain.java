@@ -4,7 +4,7 @@ import Estados.Environment;
 import Operadores.Move;
 import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFSwithLog;
 import es.deusto.ingenieria.is.search.algorithms.blind.DepthFSwithLog;
-
+//Clase con pruebas de diferentes métodos. Pruebas comentadas.
 public class TestMain {
 
 	public static void main(String[] args) {
@@ -50,7 +50,7 @@ public class TestMain {
 		// System.out.println("No se ha alcanzado el estado final.");
 		// }
 
-		// Prueba metodo solve()
+// Prueba metodo solve()
 		try {
 			HanoiTowers problem = new HanoiTowers();
 			problem.addInitialState(problem.gatherInitialPercepts());

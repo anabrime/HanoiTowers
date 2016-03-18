@@ -2,13 +2,15 @@ package ObjetosDelEntorno;
 
 import java.util.ArrayList;
 
-//En la clase torre equals de arrays de discos y en environmment equals de torre con torre
+//Clase que implementa las torres del entorno.
 public class Tower implements Cloneable {
-
-	// private int id;
-
-	private ArrayList<Disc> discosEnTorre;
-
+//Variables
+	private ArrayList<Disc> discosEnTorre; //Estructura que guarda los discos que contiene cada torre.
+//Constructor
+	public Tower() {
+		setDiscosEnTorre(new ArrayList<Disc>());
+	}
+//Getters y Setters
 	public ArrayList<Disc> getDiscosEnTorre() {
 		return discosEnTorre;
 	}
@@ -21,12 +23,7 @@ public class Tower implements Cloneable {
 		this.discosEnTorre = discosEnTorre;
 	}
 
-	public Tower() {
-		setDiscosEnTorre(new ArrayList<Disc>());
-	}
-
-	// Coloca discos en la primera torre donde
-	// el numero de discos a colocar es "id"
+// Coloca discos en la primera torre donde el numero de discos a colocar es "id"
 	public void estadoInicial_(int id) {
 		for (int i = 1; i <= id; i++) {
 			Disc disc = new Disc(i);
@@ -34,7 +31,7 @@ public class Tower implements Cloneable {
 		}
 
 	}
-
+//Metodo toString() redefinido.
 	@Override
 	public String toString() {
 		String str = " ";
@@ -43,7 +40,7 @@ public class Tower implements Cloneable {
 		}
 		return str;
 	}
-
+//Metodo de clonado de torres. Replica la información de todas las variables de la clase torre.
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object clone() {
@@ -62,7 +59,7 @@ public class Tower implements Cloneable {
 
 		return clon;
 	}
-
+//Metodo que compara un entorno con otro. En caso de ser iguales, devuelve True, y en caso cntrario False.
 	public boolean equals(Tower t) {
 
 		if (this.getDiscosEnTorre().size() == t.getDiscosEnTorre().size()) {
@@ -83,7 +80,7 @@ public class Tower implements Cloneable {
 	// } else
 	// equal = false;
 	// }
-
+//Main de prueba.
 	public static void main(String[] args) {
 		Tower torre = new Tower();
 		Tower clon;

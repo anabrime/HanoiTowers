@@ -12,18 +12,19 @@ import es.deusto.ingenieria.is.search.algorithms.Node;
 import es.deusto.ingenieria.is.search.algorithms.SearchMethod;
 import es.deusto.ingenieria.is.search.formulation.Problem;
 import es.deusto.ingenieria.is.search.formulation.State;
-
+//Clase qur implementa el problema.
 public class HanoiTowers extends Problem {
-
-	private Environment env1 = new Environment(3, 4, 0, 2);
+//Variables
+	private Environment env1 = new Environment(3, 4, 0, 2); //Variable de entorno para inicializar el problema.
 	// private Environment env1 = new Environment(3, 4, 0, 0);
-
+//Cosntructor
 	public HanoiTowers() {
 		super();
 		this.createOperators();
 
 	}
-
+//Método que comprueba que el estado que le entra es un estado fin. En caso de que todos los discos estes en la torre destino, es un estado final.
+//Gracias a comprobaciones anteriores en la clase Move, nos aseguramos de que los discos esten bien ordenados en la torre.
 	@Override
 	public boolean isFinalState(State state) {
 		if (state != null && state instanceof Environment) {
@@ -34,12 +35,12 @@ public class HanoiTowers extends Problem {
 		}
 		return false;
 	}
-
+//Método que "recoge" el estado inicial.
 	@Override
 	public State gatherInitialPercepts() {
 		return env1;
 	}
-
+//Método para crear los operadores.
 	protected void createOperators() {
 
 		for (int i = 0; i < env1.getTorres(); i++) {
@@ -51,7 +52,7 @@ public class HanoiTowers extends Problem {
 			}
 		}
 	}
-
+//Método de resolución del problema.
 	public void solve(SearchMethod searchMethod) {
 		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.S");
 		Date beginDate = Calendar.getInstance().getTime();

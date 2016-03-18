@@ -4,18 +4,18 @@ import Estados.Environment;
 import ObjetosDelEntorno.Disc;
 import es.deusto.ingenieria.is.search.formulation.Operator;
 import es.deusto.ingenieria.is.search.formulation.State;
-
+//Clase que define las acciones, sus condiciones de cumplimiento y los efectos de las mismas.
 public class Move extends Operator {
-
-	private int posOrigen;
-	private int posDestino;
-
+//Variables
+	private int posOrigen; //Posición que el algoritmo toma como inicial.
+	private int posDestino; //Posición que el algoritmo toma como final.
+//Constructor
 	public Move(int posOrigen, int posDestino) {
 		super();
 		this.posOrigen = posOrigen;
 		this.posDestino = posDestino;
 	}
-
+//Método que implementa las condiciones que se deben de cumplir ara realizar una acción.
 	@Override
 	public boolean isApplicable(State state) {
 		// Comprueba que la torre de origen no este vacia y que en caso de tener
@@ -43,7 +43,7 @@ public class Move extends Operator {
 			return false;
 		}
 	}
-
+//Método que implementa los efectos de las acciones cuando estas son aplicables.
 	@Override
 	public State effect(State state) {
 		Environment newEnvironment = (Environment) ((Environment) state).clone();

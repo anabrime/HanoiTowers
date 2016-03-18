@@ -3,14 +3,27 @@ package Estados;
 import ObjetosDelEntorno.Tower;
 import es.deusto.ingenieria.is.search.formulation.State;
 
+//Clase que implementa el entorno del proceso.
 public class Environment extends State implements Cloneable {
-
-	private int torres;
-	private int discos;
-	private Tower[] arrayTorres;
-	private int torreInicial;
-	private int torreFinal;
-
+//Variables
+	private int torres; //Numero de torres que contendrá el entorno.
+	private int discos; //Numero de discos que contendrá el entorno.
+	private Tower[] arrayTorres; //Estructura que contendrá todas las torres del entorno.
+	private int torreInicial //Id de la torre que se considera como inicial.
+	private int torreFinal; //Id de la torre que se considera como final.
+//Constructor
+	public Environment(int torres, int discos, int torreInicial, int torreFinal) {
+		this.torres = torres;
+		this.discos = discos;
+		this.torreFinal = torreFinal;
+		this.torreInicial = torreInicial;
+		this.arrayTorres = new Tower[torres];
+		for (int i = 0; i < torres; i++) {
+			this.arrayTorres[i] = new Tower();
+		}
+		this.arrayTorres[torreInicial].estadoInicial_(discos);
+	}
+//Getters y Setters
 	public int getTorreInicial() {
 		return torreInicial;
 	}
@@ -26,40 +39,6 @@ public class Environment extends State implements Cloneable {
 	public void setTorreFinal(int torreFinal) {
 		this.torreFinal = torreFinal;
 	}
-
-	public Environment(int torres, int discos, int torreInicial, int torreFinal) {
-		this.torres = torres;
-		this.discos = discos;
-		this.torreFinal = torreFinal;
-		this.torreInicial = torreInicial;
-		this.arrayTorres = new Tower[torres];
-		for (int i = 0; i < torres; i++) {
-			this.arrayTorres[i] = new Tower();
-		}
-		this.arrayTorres[torreInicial].estadoInicial_(discos);
-	}
-
-	@Override
-	public Object clone() {
-		Environment clon = null;
-
-		try {
-			clon = (Environment) super.clone();
-			clon.torres = this.torres;
-			clon.discos = this.discos;
-			clon.torreInicial = this.torreInicial;
-			clon.torreFinal = this.torreFinal;
-			clon.arrayTorres = new Tower[this.torres];
-			for (int i = 0; i < this.torres; i++) {
-				clon.arrayTorres[i] = (Tower) this.arrayTorres[i].clone();
-			}
-		} catch (CloneNotSupportedException e) {
-			System.err.println("% [ERROR] Environment.clone(): " + e.getMessage());
-		}
-
-		return clon;
-	}
-
 	public int getTorres() {
 		return torres;
 	}
@@ -87,7 +66,30 @@ public class Environment extends State implements Cloneable {
 	public void setArrayTorres(Tower[] arrayTorres) {
 		this.arrayTorres = arrayTorres;
 	}
+	
+//Metodo de clonado de entornos. Replica la información de todas las variables de la clase entorno.
+	@Override
+	public Object clone() {
+		Environment clon = null;
 
+		try {
+			clon = (Environment) super.clone();
+			clon.torres = this.torres;
+			clon.discos = this.discos;
+			clon.torreInicial = this.torreInicial;
+			clon.torreFinal = this.torreFinal;
+			clon.arrayTorres = new Tower[this.torres];
+			for (int i = 0; i < this.torres; i++) {
+				clon.arrayTorres[i] = (Tower) this.arrayTorres[i].clone();
+			}
+		} catch (CloneNotSupportedException e) {
+			System.err.println("% [ERROR] Environment.clone(): " + e.getMessage());
+		}
+
+		return clon;
+	}
+
+//Metodo que compara un entorno con otro. En caso de ser iguales, devuelve True, y en caso cntrario False.	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof Environment && ((Environment) obj).torres == (this.torres)
@@ -101,7 +103,8 @@ public class Environment extends State implements Cloneable {
 		}
 		return true;
 	}
-
+	
+//Metodo toString() redefinido.
 	@Override
 	public String toString() {
 		String str = "";
@@ -111,7 +114,7 @@ public class Environment extends State implements Cloneable {
 		}
 		return str;
 	}
-
+//Main de prueba.
 	public static void main(String[] args) {
 		Environment entorno = new Environment(3, 4, 0, 2);
 		Environment entorno1 = new Environment(3, 4, 0, 2);
