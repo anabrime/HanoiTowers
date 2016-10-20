@@ -1,2 +1,0 @@
-Redefinir los metodos toString() de forma que se entienda claramente cuando aparezcan en el fichero log.
-Implementar las pruebas de los clone() en las clases Tower y Environment.
